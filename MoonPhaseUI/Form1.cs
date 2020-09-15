@@ -81,11 +81,11 @@ namespace MoonPhase
         private void Go()
         {
             var type = cmbNasaType.Text;
+            var phase = MoonPhase.GetPhase(dateTimePicker1.Value);
+            lblStatus.Text = phase.ToString();
             if (type == "Local")
             {
-                var phase = MoonPhase.GetPhase(dateTimePicker1.Value);
                 picture.Image = phase.Image_North;
-                lblStatus.Text = phase.ToString();
             }
             else
             {
