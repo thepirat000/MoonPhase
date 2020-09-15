@@ -61,15 +61,22 @@ namespace MoonPhase
                     var phase = MoonPhase.GetPhase(date);
                     img = phase.Image_North;
                 }
-                else if (args[1].ToUpper() == "NASA1")
+                else
                 {
-                    var uris = MoonNasaImageHelper.GetMoonImagesUrls(date);
-                    img = uris.Image.Value;
-                }
-                else if(args[1].ToUpper() == "NASA2")
-                {
-                    var uris = MoonNasaImageHelper.GetMoonImagesUrls(date);
-                    img = uris.ImageFancy.Value;
+                    int id;
+                    if (int.TryParse(args[1], out id))
+                    {
+                        img = MoonNasaImageHelper.GetMoonImage(id, date);
+                    }
+                    else if (args[1].ToUpper().StartsWith("NASA") && args[1].Length > 4)
+                    {
+                        id = int.Parse(args[1].Substring(3, 1));
+                        img = MoonNasaImageHelper.GetMoonImage(id, date);
+                    }
+                    else
+                    {
+                        img = MoonNasaImageHelper.GetMoonImage(args[1], date);
+                    }
                 }
                 if (img != null)
                 {
@@ -103,11 +110,11 @@ namespace MoonPhase
         {
             Console.WriteLine("Commands:");
             Console.WriteLine("-wallpaper IMAGE [TYPE]: Sets the wallpaper");
-            Console.WriteLine("    IMAGE: 'LOCAL', 'NASA1' or 'NASA2'");
+            Console.WriteLine("    IMAGE: 'Local', 'Moon', 'Fancy', 'Plain', 'Globe', 'Orbit', 'FancyMini', 'MoonMini'");
             Console.WriteLine("    TYPE: (optional, default ResizeToFit) 'ResizeToFit', 'ResizeCrop', 'Centered', 'Tiled' or 'Stretched'");
             Console.WriteLine();
             Console.WriteLine("-install IMAGE MINUTES [START_MINUTES] [TYPE]: Installs the scheduler");
-            Console.WriteLine("    IMAGE: 'LOCAL', 'NASA1' or 'NASA2'");
+            Console.WriteLine("    IMAGE: 'Local', 'Moon', 'Fancy', 'Plain', 'Globe', 'Orbit', 'FancyMini', 'MoonMini'");
             Console.WriteLine("    MINUTES: Minutes until next run");
             Console.WriteLine("    START_MINUTES: (optional, default 0) Minutes until the first run");
             Console.WriteLine("    TYPE: (optional, default ResizeToFit) 'ResizeToFit', 'ResizeCrop', 'Centered', 'Tiled' or 'Stretched'");

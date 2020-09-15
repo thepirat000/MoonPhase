@@ -21,9 +21,10 @@ namespace MoonPhase
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var uris = MoonNasaImageHelper.GetMoonImagesUrls(dateTimePicker1.Value);
+            var type = cmbNasaType.Text;
             Cursor.Current = Cursors.WaitCursor;
-            picture.Image = uris.Image.Value;
+            var img = MoonNasaImageHelper.GetMoonImage(type, dateTimePicker1.Value);
+            picture.Image = img;
             Cursor.Current = Cursors.Default;
         }
 
@@ -57,15 +58,6 @@ namespace MoonPhase
             var phase = MoonPhase.GetPhase(dateTimePicker1.Value);
             picture.Image = phase.Image_North;
             lblStatus.Text = phase.ToString();
-        }
-
-        private void btnGoNasaFancy_Click(object sender, EventArgs e)
-        {
-            var uris = MoonNasaImageHelper.GetMoonImagesUrls(dateTimePicker1.Value);
-            Cursor.Current = Cursors.WaitCursor;
-            picture.Image = uris.ImageFancy.Value;
-            Cursor.Current = Cursors.Default;
-
         }
 
         private void btnSetWallpaper_Click(object sender, EventArgs e)
