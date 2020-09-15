@@ -42,14 +42,6 @@ namespace MoonPhase
 
         private static void MainConsole(string[] args)
         {
-            if (args[0].ToLower() == "-h" || args[0].ToLower() == "/h" || args[0].ToLower() == "-help" || args[0].ToLower() == "/help")
-            {
-                AttachToParentConsole();
-                ShowHelp();
-                SendKeys.SendWait("{ENTER}");
-                return;
-            }
-
             var date = DateTime.Now;
             
             if (args[0].ToLower() == "-w"  || args[0].ToLower() == "/w" || args[0].ToLower() == "-wallpaper" || args[0].ToLower() == "/wallpaper")
@@ -97,6 +89,11 @@ namespace MoonPhase
             {
                 TaskSchedule.DeleteSchedule(args[1]);
             }
+            else
+            {
+                AttachToParentConsole();
+                ShowHelp();
+            }
         }
 
         private static void AttachToParentConsole()
@@ -122,6 +119,8 @@ namespace MoonPhase
             Console.WriteLine("-uninstall IMAGE: Uninstalls the scheduler");
             Console.WriteLine("    IMAGE: 'LOCAL', 'NASA1' or 'NASA2'");
             Console.WriteLine();
+
+            SendKeys.SendWait("{ENTER}");
         }
     }
 }
