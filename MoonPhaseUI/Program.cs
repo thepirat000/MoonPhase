@@ -78,7 +78,7 @@ namespace MoonPhase
             }
             else if (args[0].ToLower() == "-i" || args[0].ToLower() == "/i" || args[0].ToLower() == "-install" || args[0].ToLower() == "/install")
             {
-                // install NASA1 5
+                // install 
                 int mins = args.Length < 3 ? 15 : int.Parse(args[2]);
                 int start_mins = args.Length < 4 ? 0 : int.Parse(args[3]);
                 var imgType = args.Length < 2 ? "NASA1" : args[1];

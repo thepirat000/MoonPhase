@@ -31,14 +31,14 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.picture = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cmbNasaType = new System.Windows.Forms.ComboBox();
             this.btnSetWallpaper = new System.Windows.Forms.Button();
             this.btnMinus = new System.Windows.Forms.Button();
             this.btnPlus = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btnToday = new System.Windows.Forms.Button();
-            this.goNasaImage = new System.Windows.Forms.Button();
-            this.cmbNasaType = new System.Windows.Forms.ComboBox();
+            this.cmbIncrement = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
             this.panel1.SuspendLayout();
@@ -71,6 +71,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cmbIncrement);
             this.panel1.Controls.Add(this.cmbNasaType);
             this.panel1.Controls.Add(this.btnSetWallpaper);
             this.panel1.Controls.Add(this.btnMinus);
@@ -78,12 +79,30 @@
             this.panel1.Controls.Add(this.lblStatus);
             this.panel1.Controls.Add(this.dateTimePicker1);
             this.panel1.Controls.Add(this.btnToday);
-            this.panel1.Controls.Add(this.goNasaImage);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1017, 29);
             this.panel1.TabIndex = 1;
+            // 
+            // cmbNasaType
+            // 
+            this.cmbNasaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbNasaType.FormattingEnabled = true;
+            this.cmbNasaType.Items.AddRange(new object[] {
+            "Local",
+            "Moon",
+            "Fancy",
+            "Plain",
+            "Globe",
+            "Orbit",
+            "FancyMini",
+            "MoonMini"});
+            this.cmbNasaType.Location = new System.Drawing.Point(9, 4);
+            this.cmbNasaType.Name = "cmbNasaType";
+            this.cmbNasaType.Size = new System.Drawing.Size(110, 21);
+            this.cmbNasaType.TabIndex = 6;
+            this.cmbNasaType.SelectedIndexChanged += new System.EventHandler(this.cmbNasaType_SelectedIndexChanged);
             // 
             // btnSetWallpaper
             // 
@@ -97,9 +116,9 @@
             // 
             // btnMinus
             // 
-            this.btnMinus.Location = new System.Drawing.Point(154, 3);
+            this.btnMinus.Location = new System.Drawing.Point(355, 3);
             this.btnMinus.Name = "btnMinus";
-            this.btnMinus.Size = new System.Drawing.Size(23, 23);
+            this.btnMinus.Size = new System.Drawing.Size(24, 23);
             this.btnMinus.TabIndex = 4;
             this.btnMinus.Text = "<";
             this.btnMinus.UseVisualStyleBackColor = true;
@@ -107,9 +126,9 @@
             // 
             // btnPlus
             // 
-            this.btnPlus.Location = new System.Drawing.Point(178, 3);
+            this.btnPlus.Location = new System.Drawing.Point(431, 3);
             this.btnPlus.Name = "btnPlus";
-            this.btnPlus.Size = new System.Drawing.Size(23, 23);
+            this.btnPlus.Size = new System.Drawing.Size(24, 23);
             this.btnPlus.TabIndex = 3;
             this.btnPlus.Text = ">";
             this.btnPlus.UseVisualStyleBackColor = true;
@@ -127,48 +146,37 @@
             // 
             this.dateTimePicker1.CustomFormat = "yyyy-MM-dd   HH:mm:ss";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(9, 5);
+            this.dateTimePicker1.Location = new System.Drawing.Point(125, 5);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(143, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(144, 20);
             this.dateTimePicker1.TabIndex = 1;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // btnToday
             // 
-            this.btnToday.Location = new System.Drawing.Point(207, 3);
+            this.btnToday.Location = new System.Drawing.Point(385, 3);
             this.btnToday.Name = "btnToday";
-            this.btnToday.Size = new System.Drawing.Size(49, 23);
+            this.btnToday.Size = new System.Drawing.Size(40, 23);
             this.btnToday.TabIndex = 0;
-            this.btnToday.Text = "Today";
+            this.btnToday.Text = "Now";
             this.btnToday.UseVisualStyleBackColor = true;
             this.btnToday.Click += new System.EventHandler(this.btnToday_Click);
             // 
-            // goNasaImage
+            // cmbIncrement
             // 
-            this.goNasaImage.Location = new System.Drawing.Point(444, 3);
-            this.goNasaImage.Name = "goNasaImage";
-            this.goNasaImage.Size = new System.Drawing.Size(58, 23);
-            this.goNasaImage.TabIndex = 0;
-            this.goNasaImage.Text = "NASA";
-            this.goNasaImage.UseVisualStyleBackColor = true;
-            this.goNasaImage.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // cmbNasaType
-            // 
-            this.cmbNasaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbNasaType.FormattingEnabled = true;
-            this.cmbNasaType.Items.AddRange(new object[] {
-            "Moon",
-            "Fancy",
-            "Plain",
-            "Globe",
-            "Orbit",
-            "FancyMini",
-            "MoonMini"});
-            this.cmbNasaType.Location = new System.Drawing.Point(314, 4);
-            this.cmbNasaType.Name = "cmbNasaType";
-            this.cmbNasaType.Size = new System.Drawing.Size(124, 21);
-            this.cmbNasaType.TabIndex = 6;
+            this.cmbIncrement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbIncrement.FormattingEnabled = true;
+            this.cmbIncrement.Items.AddRange(new object[] {
+            "Minute",
+            "Quarter-Hour",
+            "Half-Hour",
+            "Hour",
+            "Day",
+            "Month"});
+            this.cmbIncrement.Location = new System.Drawing.Point(275, 4);
+            this.cmbIncrement.Name = "cmbIncrement";
+            this.cmbIncrement.Size = new System.Drawing.Size(74, 21);
+            this.cmbIncrement.TabIndex = 7;
             // 
             // Form1
             // 
@@ -191,7 +199,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.PictureBox picture;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button goNasaImage;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Button btnToday;
@@ -199,6 +206,7 @@
         private System.Windows.Forms.Button btnPlus;
         private System.Windows.Forms.Button btnSetWallpaper;
         private System.Windows.Forms.ComboBox cmbNasaType;
+        private System.Windows.Forms.ComboBox cmbIncrement;
     }
 }
 
