@@ -53,6 +53,10 @@ namespace MoonPhase
                     var phase = MoonPhase.GetPhase(date);
                     img = phase.Image_North;
                 }
+                else if (args[1].ToUpper() == "RANDOM")
+                {
+                    img = MoonNasaImageHelper.GetRandomMoonImage(date);
+                }
                 else
                 {
                     int id;
@@ -72,7 +76,7 @@ namespace MoonPhase
                 }
                 if (img != null)
                 {
-                    var style = args.Length < 3 ? Wallpaper.Style.ResizeToFit : (Wallpaper.Style)Enum.Parse(typeof(Wallpaper.Style), args[2], true);
+                    var style = args.Length < 3 ? Wallpaper.Style.Fit : (Wallpaper.Style)Enum.Parse(typeof(Wallpaper.Style), args[2], true);
                     Wallpaper.Set(img, style);
                 }
             }
@@ -82,7 +86,7 @@ namespace MoonPhase
                 int mins = args.Length < 3 ? 15 : int.Parse(args[2]);
                 int start_mins = args.Length < 4 ? 0 : int.Parse(args[3]);
                 var imgType = args.Length < 2 ? "NASA1" : args[1];
-                var style = args.Length < 5 ? "ResizeToFit" : args[4];
+                var style = args.Length < 5 ? "Fit" : args[4];
                 TaskSchedule.CreateSchedule(mins, start_mins, imgType, style);
             }
             else if (args[0].ToLower() == "-u" || args[0].ToLower() == "/u" || args[0].ToLower() == "-uninstall" || args[0].ToLower() == "/uninstall")
@@ -108,16 +112,16 @@ namespace MoonPhase
             Console.WriteLine("Commands:");
             Console.WriteLine("-wallpaper IMAGE [TYPE]: Sets the wallpaper");
             Console.WriteLine("    IMAGE: 'Local', 'Moon', 'Fancy', 'Plain', 'Globe', 'Orbit', 'FancyMini', 'MoonMini'");
-            Console.WriteLine("    TYPE: (optional, default ResizeToFit) 'ResizeToFit', 'ResizeCrop', 'Centered', 'Tiled' or 'Stretched'");
+            Console.WriteLine("    TYPE: (optional, default Fit) 'Fit', 'Fill', 'Span', 'Centered', 'Tiled' or 'Stretched'");
             Console.WriteLine();
             Console.WriteLine("-install IMAGE MINUTES [START_MINUTES] [TYPE]: Installs the scheduler");
             Console.WriteLine("    IMAGE: 'Local', 'Moon', 'Fancy', 'Plain', 'Globe', 'Orbit', 'FancyMini', 'MoonMini'");
             Console.WriteLine("    MINUTES: Minutes until next run");
             Console.WriteLine("    START_MINUTES: (optional, default 0) Minutes until the first run");
-            Console.WriteLine("    TYPE: (optional, default ResizeToFit) 'ResizeToFit', 'ResizeCrop', 'Centered', 'Tiled' or 'Stretched'");
+            Console.WriteLine("    TYPE: (optional, default Fit) 'Fit', 'Fill', 'Span', 'Centered', 'Tiled' or 'Stretched'");
             Console.WriteLine();
             Console.WriteLine("-uninstall IMAGE: Uninstalls the scheduler");
-            Console.WriteLine("    IMAGE: 'LOCAL', 'NASA1' or 'NASA2'");
+            Console.WriteLine("    IMAGE: 'Local', 'Moon', 'Fancy', 'Plain', 'Globe', 'Orbit', 'FancyMini', 'MoonMini'");
             Console.WriteLine();
 
             SendKeys.SendWait("{ENTER}");

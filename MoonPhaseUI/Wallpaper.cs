@@ -26,8 +26,9 @@ namespace MoonPhase
             Centered = 0,
             Tiled = 1,
             Stretched = 2,
-            ResizeToFit = 6,
-            ResizeCrop = 10
+            Fit = 6,
+            Fill = 10,
+            Span = 22
         }
 
         public static void Set(Image image, Style style)

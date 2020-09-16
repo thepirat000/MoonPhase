@@ -16,7 +16,7 @@ namespace MoonPhase
     public static class MoonNasaImageHelper
     {
         private const string Domain = "https://svs.gsfc.nasa.gov";
-
+        private static Random _random = new Random();
 
         public static readonly List<ImageInfo> NasaImageConfig = new List<ImageInfo>()
         {
@@ -26,7 +26,8 @@ namespace MoonPhase
             new ImageInfo() { Id = 4, Name = "Globe", UriFormat = "{Domain}{Path}frames/960x960_1x1_30p/globe.{ImageNum}.tif" },
             new ImageInfo() { Id = 5, Name = "Orbit", UriFormat = "{Domain}{Path}frames/1080x1080_1x1_30p/orbit.{ImageNum}.tif" },
             new ImageInfo() { Id = 6, Name = "FancyMini", UriFormat = "{Domain}{Path}frames/3840x2160_16x9_30p/fancy/comp.{ImageNum}.tif" },
-            new ImageInfo() { Id = 7, Name = "MoonMini", UriFormat = "{Domain}{Path}frames/216x216_1x1_30p/moon.{ImageNum}.jpg" }
+            new ImageInfo() { Id = 7, Name = "MoonMini", UriFormat = "{Domain}{Path}frames/216x216_1x1_30p/moon.{ImageNum}.jpg" },
+            new ImageInfo() { Id = 8, Name = "PlainMini", UriFormat = "{Domain}{Path}frames/1920x1080_16x9_30p/plain/moon.{ImageNum}.tif" },
         };
 
         private readonly static int[] NImages = new int[] { 8760, 8760, 8760, 8784 };
@@ -39,6 +40,12 @@ namespace MoonPhase
           "/vis/a000000/a004400/a004442/",
           "/vis/a000000/a004700/a004768/" 
         };
+
+        public static Image GetRandomMoonImage(DateTime dt)
+        {
+            var id = _random.Next(1, NasaImageConfig.Max(ic => ic.Id) + 1);
+            return GetMoonImage(id, dt);
+        }
 
         public static Image GetMoonImage(string name, DateTime dt)
         {

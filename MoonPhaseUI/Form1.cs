@@ -1,13 +1,5 @@
-﻿using MoonPhase;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MoonPhase
@@ -21,8 +13,13 @@ namespace MoonPhase
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            cmbNasaType.Items.Clear();
+            cmbNasaType.DataSource = MoonNasaImageHelper.NasaImageConfig;
+            cmbNasaType.DisplayMember = "Name";
+            cmbNasaType.ValueMember = "Id";
             cmbNasaType.SelectedIndex = 0;
             cmbIncrement.SelectedIndex = 3;
+            
         }
 
         private void btnToday_Click(object sender, EventArgs e)
@@ -100,7 +97,7 @@ namespace MoonPhase
         {
             string tempPath = Path.Combine(Path.GetTempPath(), "wallpaper.bmp");
             picture.Image.Save(tempPath, System.Drawing.Imaging.ImageFormat.Bmp);
-            Wallpaper.Set(tempPath, Wallpaper.Style.ResizeToFit);
+            Wallpaper.Set(tempPath, Wallpaper.Style.Fit);
         }
 
         private void cmbNasaType_SelectedIndexChanged(object sender, EventArgs e)

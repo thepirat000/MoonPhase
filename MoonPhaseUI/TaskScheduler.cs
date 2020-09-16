@@ -8,7 +8,7 @@ namespace MoonPhase
     public static class TaskSchedule
     {
 
-        public static void CreateSchedule(int minutesInterval, int minutesFirstStart, string imageType = "LOCAL", string style = "ResizeToFit")
+        public static void CreateSchedule(int minutesInterval, int minutesFirstStart, string imageType = "LOCAL", string style = "Fit")
         {
             imageType = imageType?.ToUpper() ?? "LOCAL";
             var taskName = $"MoonPhase_{imageType}";
@@ -19,6 +19,7 @@ namespace MoonPhase
                 TaskDefinition td = ts.NewTask();
                 td.Principal.RunLevel = TaskRunLevel.Highest;
                 td.Settings.Hidden = true;
+                td.Settings.StartWhenAvailable = true;
                 td.RegistrationInfo.Description = "Moon phase wallpaper changer";
                 td.RegistrationInfo.Author = "Federico Colombo";
 
