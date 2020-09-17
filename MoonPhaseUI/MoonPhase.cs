@@ -14,12 +14,8 @@ namespace MoonPhase
         public bool Waxing { get; }
         public bool Waning { get; }
         public int Id { get; }
-        public Image Image_South { get; }
-        public Image Image_North { get; }
         public MoonFracPhaseAngle Illumination { get; private set; }
-
-
-        
+                
         public double Age { get { return Illumination?.phase * 29.53d ?? 0d;  } }
 
         private MoonPhase(double minFraction, double maxFraction, bool waxing, bool waning, string nameES, string nameEN, int id)
@@ -31,8 +27,6 @@ namespace MoonPhase
             Waning = waning;
             Name_ES = nameES;
             Name_EN = nameEN;
-            Image_South = Image.FromFile($@"Images\Moon\South\{Id}_{Name_EN.Replace(" ", "")}.jpg");
-            Image_North = Image.FromFile($@"Images\Moon\North\{Id}_{Name_EN.Replace(" ", "")}.jpg");
         }
         public static MoonPhase NewMoon = new MoonPhase(0, 0.02, true, true, "Luna Nueva", "New Moon", 1);
         public static MoonPhase WaxingCrescent = new MoonPhase(0.02, 0.35, true, false, "Creciente Cóncava", "Waxing Crescent", 2);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 
 namespace MoonPhase
 {
@@ -30,6 +31,8 @@ namespace MoonPhase
             new ImageInfo() { Id = 8, Name = "PlainMini", UriFormat = "{Domain}{Path}frames/1920x1080_16x9_30p/plain/moon.{ImageNum}.tif" },
         };
 
+        // One image per hour, starting in 0001 for the first hour and until the last hour on the year 
+        // Normal year has 8760 images, and leap year has 8784
         private readonly static int[] NImages = new int[] { 8760, 8760, 8760, 8784 };
         private readonly static int MinYear = 2017;
         private readonly static int MaxYear = 2020;
@@ -43,7 +46,8 @@ namespace MoonPhase
 
         public static Image GetRandomMoonImage(DateTime dt)
         {
-            var id = _random.Next(1, NasaImageConfig.Max(ic => ic.Id) + 1);
+            // 1 to 5 (do not include the Mini versions
+            var id = _random.Next(1, 6);
             return GetMoonImage(id, dt);
         }
 
@@ -67,7 +71,7 @@ namespace MoonPhase
             else
             {
                 var janone = new DateTime(moon_year, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-                imagenum = 1 + (int)Math.Round((dt.GetJavascriptTimeStamp() - janone.GetJavascriptTimeStamp()) / 3600000d);
+                imagenum = 1 + (int)Math.Round((dt.ToUniversalTime() - janone).TotalMilliseconds / 3600000d);
                 if (imagenum > NImages[moon_year - MinYear])
                 {
                     imagenum = NImages[moon_year - MinYear];
@@ -91,18 +95,10 @@ namespace MoonPhase
 
         private static Image DownloadImage(string url)
         {
-            using (var stream = new System.Net.WebClient().OpenRead(url))
+            using (var stream = new WebClient().OpenRead(url))
             {
-                return System.Drawing.Image.FromStream(stream);
+                return Image.FromStream(stream);
             }
         }
-
-        private static long GetJavascriptTimeStamp(this DateTime dt)
-        {
-            var nineteenseventy = new DateTime(1970, 1, 1);
-            var timeElapsed = (dt.ToUniversalTime() - nineteenseventy);
-            return (long)(timeElapsed.TotalMilliseconds + 0.5);
-        }
-
     }
 }

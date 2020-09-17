@@ -6,6 +6,8 @@ namespace MoonPhase
 {
     public partial class Form1 : Form
     {
+        private bool _playing = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -18,8 +20,7 @@ namespace MoonPhase
             cmbNasaType.DisplayMember = "Name";
             cmbNasaType.ValueMember = "Id";
             cmbNasaType.SelectedIndex = 0;
-            cmbIncrement.SelectedIndex = 3;
-            
+            cmbIncrement.SelectedIndex = 0;
         }
 
         private void btnToday_Click(object sender, EventArgs e)
@@ -43,10 +44,6 @@ namespace MoonPhase
             {
                 dateTimePicker1.Value = dateTimePicker1.Value.AddDays(increment);
             }
-            else if (type == "Minute")
-            {
-                dateTimePicker1.Value = dateTimePicker1.Value.AddMinutes(increment);
-            }
             else if (type == "Hour")
             {
                 dateTimePicker1.Value = dateTimePicker1.Value.AddHours(increment);
@@ -54,14 +51,6 @@ namespace MoonPhase
             else if (type == "Month")
             {
                 dateTimePicker1.Value = dateTimePicker1.Value.AddMonths(increment);
-            }
-            else if (type == "Half-Hour")
-            {
-                dateTimePicker1.Value = dateTimePicker1.Value.AddMinutes(30 * increment);
-            }
-            else if (type == "Quarter-Hour")
-            {
-                dateTimePicker1.Value = dateTimePicker1.Value.AddMinutes(15 * increment);
             }
         }
 
@@ -75,20 +64,19 @@ namespace MoonPhase
             Go();
         }
 
-        private void Go()
+        private void Go(bool keepCursor = false)
         {
             var type = cmbNasaType.Text;
             var phase = MoonPhase.GetPhase(dateTimePicker1.Value);
             lblStatus.Text = phase.ToString();
-            if (type == "Local")
-            {
-                picture.Image = phase.Image_North;
-            }
-            else
+            if (!keepCursor)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                var img = MoonNasaImageHelper.GetMoonImage(type, dateTimePicker1.Value);
-                picture.Image = img;
+            }
+            var img = MoonNasaImageHelper.GetMoonImage(type, dateTimePicker1.Value);
+            picture.Image = img;
+            if (!keepCursor)
+            {
                 Cursor.Current = Cursors.Default;
             }
         }
@@ -103,6 +91,26 @@ namespace MoonPhase
         private void cmbNasaType_SelectedIndexChanged(object sender, EventArgs e)
         {
             Go();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (btnPlay.Text == "▶")
+            {
+                btnPlay.Text = "■";
+                _playing = true;
+                while(_playing)
+                {
+                    Go(true);
+                    AddIncrement(cmbIncrement.Text, 1);
+                    Application.DoEvents();
+                }
+            }
+            else
+            {
+                btnPlay.Text = "▶";
+                _playing = false;
+            }
         }
     }
 }

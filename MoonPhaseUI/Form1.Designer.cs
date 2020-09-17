@@ -31,6 +31,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.picture = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cmbIncrement = new System.Windows.Forms.ComboBox();
             this.cmbNasaType = new System.Windows.Forms.ComboBox();
             this.btnSetWallpaper = new System.Windows.Forms.Button();
             this.btnMinus = new System.Windows.Forms.Button();
@@ -38,7 +39,7 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btnToday = new System.Windows.Forms.Button();
-            this.cmbIncrement = new System.Windows.Forms.ComboBox();
+            this.btnPlay = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
             this.panel1.SuspendLayout();
@@ -75,6 +76,7 @@
             this.panel1.Controls.Add(this.cmbNasaType);
             this.panel1.Controls.Add(this.btnSetWallpaper);
             this.panel1.Controls.Add(this.btnMinus);
+            this.panel1.Controls.Add(this.btnPlay);
             this.panel1.Controls.Add(this.btnPlus);
             this.panel1.Controls.Add(this.lblStatus);
             this.panel1.Controls.Add(this.dateTimePicker1);
@@ -84,6 +86,19 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1017, 29);
             this.panel1.TabIndex = 1;
+            // 
+            // cmbIncrement
+            // 
+            this.cmbIncrement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbIncrement.FormattingEnabled = true;
+            this.cmbIncrement.Items.AddRange(new object[] {
+            "Hour",
+            "Day",
+            "Month"});
+            this.cmbIncrement.Location = new System.Drawing.Point(275, 4);
+            this.cmbIncrement.Name = "cmbIncrement";
+            this.cmbIncrement.Size = new System.Drawing.Size(74, 21);
+            this.cmbIncrement.TabIndex = 7;
             // 
             // cmbNasaType
             // 
@@ -162,21 +177,15 @@
             this.btnToday.UseVisualStyleBackColor = true;
             this.btnToday.Click += new System.EventHandler(this.btnToday_Click);
             // 
-            // cmbIncrement
+            // btnPlay
             // 
-            this.cmbIncrement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbIncrement.FormattingEnabled = true;
-            this.cmbIncrement.Items.AddRange(new object[] {
-            "Minute",
-            "Quarter-Hour",
-            "Half-Hour",
-            "Hour",
-            "Day",
-            "Month"});
-            this.cmbIncrement.Location = new System.Drawing.Point(275, 4);
-            this.cmbIncrement.Name = "cmbIncrement";
-            this.cmbIncrement.Size = new System.Drawing.Size(74, 21);
-            this.cmbIncrement.TabIndex = 7;
+            this.btnPlay.Location = new System.Drawing.Point(461, 3);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(24, 23);
+            this.btnPlay.TabIndex = 3;
+            this.btnPlay.Text = "▶";
+            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Form1
             // 
@@ -207,6 +216,7 @@
         private System.Windows.Forms.Button btnSetWallpaper;
         private System.Windows.Forms.ComboBox cmbNasaType;
         private System.Windows.Forms.ComboBox cmbIncrement;
+        private System.Windows.Forms.Button btnPlay;
     }
 }
 
