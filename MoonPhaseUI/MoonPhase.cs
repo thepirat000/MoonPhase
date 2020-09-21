@@ -7,6 +7,8 @@ namespace MoonPhase
 {
     public class MoonPhase
     {
+        const double SynodicMonth = 29.530588853d;
+
         public double MinFraction { get; }
         public double MaxFraction { get; }
         public string Name_ES { get; }
@@ -16,7 +18,7 @@ namespace MoonPhase
         public int Id { get; }
         public MoonFracPhaseAngle Illumination { get; private set; }
                 
-        public double Age { get { return Illumination?.phase * 29.53d ?? 0d;  } }
+        public double Age { get { return Illumination?.phase * SynodicMonth ?? 0d;  } }
 
         private MoonPhase(double minFraction, double maxFraction, bool waxing, bool waning, string nameES, string nameEN, int id)
         {

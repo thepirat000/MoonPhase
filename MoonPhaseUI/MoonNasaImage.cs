@@ -36,6 +36,11 @@ namespace MoonPhase
         private readonly static int[] NImages = new int[] { 8760, 8760, 8760, 8784 };
         private readonly static int MinYear = 2017;
         private readonly static int MaxYear = 2020;
+
+        // TODO: Add paths for south emisphere:
+        //  /vis/a000000/a004700/a004769/ 
+        //  etc...
+
         private readonly static string[] Paths = new string[] 
         { 
           "/vis/a000000/a004500/a004537/",
@@ -44,20 +49,20 @@ namespace MoonPhase
           "/vis/a000000/a004700/a004768/" 
         };
 
-        public static Image GetRandomMoonImage(DateTime dt)
+        public static string GetRandomMoonImageUrl(DateTime dt)
         {
-            // 1 to 5 (do not include the Mini versions
+            // 1 to 5 (do not include the Mini versions)
             var id = _random.Next(1, 6);
-            return GetMoonImage(id, dt);
+            return GetMoonImageUrl(id, dt);
         }
 
-        public static Image GetMoonImage(string name, DateTime dt)
+        public static string GetMoonImageUrl(string name, DateTime dt)
         {
             var id = NasaImageConfig.FirstOrDefault(img => img.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))?.Id ?? 0;
-            return GetMoonImage(id, dt);
+            return GetMoonImageUrl(id, dt);
         }
 
-        public static Image GetMoonImage(int id, DateTime dt)
+        public static string GetMoonImageUrl(int id, DateTime dt)
         {
             int imagenum;
             string path;
@@ -78,10 +83,10 @@ namespace MoonPhase
                 }
             }
             path = Paths[moon_year - MinYear];
-            
+
             var imgInfo = NasaImageConfig.FirstOrDefault(img => img.Id == id) ?? NasaImageConfig[0];
             var url = FormatUrl(imgInfo.UriFormat, path, imagenum);
-            return DownloadImage(url);
+            return url;
         }
 
         private static string FormatUrl(string format, string path, int imageNum)
@@ -91,14 +96,6 @@ namespace MoonPhase
                 .Replace("{Domain}", Domain)
                 .Replace("{Path}", path)
                 .Replace("{ImageNum}", imageId.ToString());
-        }
-
-        private static Image DownloadImage(string url)
-        {
-            using (var stream = new WebClient().OpenRead(url))
-            {
-                return Image.FromStream(stream);
-            }
         }
     }
 }

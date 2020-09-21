@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Windows.Forms;
 
 namespace MoonPhase
@@ -64,23 +67,6 @@ namespace MoonPhase
             Go();
         }
 
-        private void Go(bool keepCursor = false)
-        {
-            var type = cmbNasaType.Text;
-            var phase = MoonPhase.GetPhase(dateTimePicker1.Value);
-            lblStatus.Text = phase.ToString();
-            if (!keepCursor)
-            {
-                Cursor.Current = Cursors.WaitCursor;
-            }
-            var img = MoonNasaImageHelper.GetMoonImage(type, dateTimePicker1.Value);
-            picture.Image = img;
-            if (!keepCursor)
-            {
-                Cursor.Current = Cursors.Default;
-            }
-        }
-
         private void btnSetWallpaper_Click(object sender, EventArgs e)
         {
             string tempPath = Path.Combine(Path.GetTempPath(), "wallpaper.bmp");
@@ -111,6 +97,35 @@ namespace MoonPhase
                 btnPlay.Text = "▶";
                 _playing = false;
             }
+        }
+
+        private void Go(bool keepCursor = false)
+        {
+            var type = cmbNasaType.Text;
+            var phase = MoonPhase.GetPhase(dateTimePicker1.Value);
+            lblStatus.Text = phase.ToString();
+            if (!keepCursor)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+            }
+            var url = MoonNasaImageHelper.GetMoonImageUrl(type, dateTimePicker1.Value);
+            picture.Image = ImageDownload.FromUrl(url);
+            lnkPicture.Text = url;
+            if (!keepCursor)
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lnkPicture_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var sInfo = new ProcessStartInfo(lnkPicture.Text);
+            Process.Start(sInfo);
         }
     }
 }

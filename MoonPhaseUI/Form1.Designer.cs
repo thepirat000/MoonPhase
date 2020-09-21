@@ -35,14 +35,17 @@
             this.cmbNasaType = new System.Windows.Forms.ComboBox();
             this.btnSetWallpaper = new System.Windows.Forms.Button();
             this.btnMinus = new System.Windows.Forms.Button();
+            this.btnPlay = new System.Windows.Forms.Button();
             this.btnPlus = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btnToday = new System.Windows.Forms.Button();
-            this.btnPlay = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lnkPicture = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -51,12 +54,14 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.picture, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1023, 542);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -65,7 +70,7 @@
             this.picture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picture.Location = new System.Drawing.Point(3, 38);
             this.picture.Name = "picture";
-            this.picture.Size = new System.Drawing.Size(1017, 501);
+            this.picture.Size = new System.Drawing.Size(1017, 481);
             this.picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picture.TabIndex = 0;
             this.picture.TabStop = false;
@@ -78,7 +83,6 @@
             this.panel1.Controls.Add(this.btnMinus);
             this.panel1.Controls.Add(this.btnPlay);
             this.panel1.Controls.Add(this.btnPlus);
-            this.panel1.Controls.Add(this.lblStatus);
             this.panel1.Controls.Add(this.dateTimePicker1);
             this.panel1.Controls.Add(this.btnToday);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -139,6 +143,16 @@
             this.btnMinus.UseVisualStyleBackColor = true;
             this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
             // 
+            // btnPlay
+            // 
+            this.btnPlay.Location = new System.Drawing.Point(461, 3);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(24, 23);
+            this.btnPlay.TabIndex = 3;
+            this.btnPlay.Text = "▶";
+            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // btnPlus
             // 
             this.btnPlus.Location = new System.Drawing.Point(431, 3);
@@ -151,11 +165,13 @@
             // 
             // lblStatus
             // 
-            this.lblStatus.Location = new System.Drawing.Point(666, 6);
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblStatus.Location = new System.Drawing.Point(675, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(348, 19);
+            this.lblStatus.Size = new System.Drawing.Size(348, 20);
             this.lblStatus.TabIndex = 2;
             this.lblStatus.Text = "...";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // dateTimePicker1
             // 
@@ -177,15 +193,26 @@
             this.btnToday.UseVisualStyleBackColor = true;
             this.btnToday.Click += new System.EventHandler(this.btnToday_Click);
             // 
-            // btnPlay
+            // panel2
             // 
-            this.btnPlay.Location = new System.Drawing.Point(461, 3);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(24, 23);
-            this.btnPlay.TabIndex = 3;
-            this.btnPlay.Text = "▶";
-            this.btnPlay.UseVisualStyleBackColor = true;
-            this.btnPlay.Click += new System.EventHandler(this.button1_Click_1);
+            this.panel2.Controls.Add(this.lnkPicture);
+            this.panel2.Controls.Add(this.lblStatus);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 522);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1023, 20);
+            this.panel2.TabIndex = 2;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // lnkPicture
+            // 
+            this.lnkPicture.AutoSize = true;
+            this.lnkPicture.Location = new System.Drawing.Point(3, 4);
+            this.lnkPicture.Name = "lnkPicture";
+            this.lnkPicture.Size = new System.Drawing.Size(0, 13);
+            this.lnkPicture.TabIndex = 0;
+            this.lnkPicture.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkPicture_LinkClicked);
             // 
             // Form1
             // 
@@ -199,6 +226,8 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picture)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -217,6 +246,8 @@
         private System.Windows.Forms.ComboBox cmbNasaType;
         private System.Windows.Forms.ComboBox cmbIncrement;
         private System.Windows.Forms.Button btnPlay;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.LinkLabel lnkPicture;
     }
 }
 

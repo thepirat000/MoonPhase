@@ -47,32 +47,32 @@ namespace MoonPhase
             if (args[0].ToLower() == "-w"  || args[0].ToLower() == "/w" || args[0].ToLower() == "-wallpaper" || args[0].ToLower() == "/wallpaper")
             {
                 FreeConsole();
-                Image img = null;
+                string imgUrl = null;
                 if (args.Length < 2 || args[1].ToUpper() == "RANDOM")
                 {
-                    img = MoonNasaImageHelper.GetRandomMoonImage(date);
+                    imgUrl = MoonNasaImageHelper.GetRandomMoonImageUrl(date);
                 }
                 else
                 {
                     int id;
                     if (int.TryParse(args[1], out id))
                     {
-                        img = MoonNasaImageHelper.GetMoonImage(id, date);
+                        imgUrl = MoonNasaImageHelper.GetMoonImageUrl(id, date);
                     }
                     else if (args[1].ToUpper().StartsWith("NASA") && args[1].Length > 4)
                     {
                         id = int.Parse(args[1].Substring(3, 1));
-                        img = MoonNasaImageHelper.GetMoonImage(id, date);
+                        imgUrl = MoonNasaImageHelper.GetMoonImageUrl(id, date);
                     }
                     else
                     {
-                        img = MoonNasaImageHelper.GetMoonImage(args[1], date);
+                        imgUrl = MoonNasaImageHelper.GetMoonImageUrl(args[1], date);
                     }
                 }
-                if (img != null)
+                if (imgUrl != null)
                 {
                     var style = args.Length < 3 ? Wallpaper.Style.Fit : (Wallpaper.Style)Enum.Parse(typeof(Wallpaper.Style), args[2], true);
-                    Wallpaper.Set(img, style);
+                    Wallpaper.Set(ImageDownload.FromUrl(imgUrl), style);
                 }
             }
             else if (args[0].ToLower() == "-i" || args[0].ToLower() == "/i" || args[0].ToLower() == "-install" || args[0].ToLower() == "/install")
